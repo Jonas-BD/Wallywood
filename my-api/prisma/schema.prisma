@@ -1,0 +1,98 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  firstname String
+  lastname String
+  email String @unique
+  password String
+  role Role
+  isActive Boolean
+  createdAt DateTime
+  cartlines Cartlines[]
+  userRatings userRatings[]
+
+  @@map("user")
+}
+
+model Cartlines {
+  id Int @id @default(autoincrement())
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+  posterId Int
+  poster Posters @relation(fields: [posterId], references: [id])
+  quantity Int
+  createdAt DateTime
+
+  @@map("cartlines")
+}
+
+model Posters {
+  id Int @id @default(autoincrement())
+  name String
+  slug String
+  description String
+  image String
+  width Int
+  height Int
+  price Float
+  stock Int
+  createdAt DateTime
+  updatedAt DateTime
+  cartlines Cartlines[]
+  userratings userRatings[]
+  genrePosterRels GenrePosterRel[]
+
+  @@map("posters")
+}
+
+model userRatings {
+  id Int @id @default(autoincrement())
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+  posterId Int
+  poster Posters @relation(fields: [posterId], references: [id])
+  numStars Int
+  createdAt DateTime
+
+  @@map("userratings")
+}
+
+model Genre {
+  id Int @id @default(autoincrement())
+  genrePosterRels GenrePosterRel[]
+  title String
+  slug String
+  createdAt DateTime
+  updatedAt DateTime
+
+  @@map("genre")
+}
+
+model GenrePosterRel {
+  genreId Int
+  poster Posters @relation(fields: [posterId], references: [id])
+  posterId Int
+  genre Genre @relation(fields: [genreId], references: [id])
+
+  @@id([genreId, posterId])
+  @@map("genreposterrel")
+}
