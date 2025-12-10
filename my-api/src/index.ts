@@ -1,6 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import { userRoutes } from './routes/userRoutes.js'
+import { authRoutes } from './routes/authRoutes.js'
 
 dotenv.config({ quiet: true })
 
@@ -13,6 +14,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 app.use('/api/users', userRoutes)
+app.use('/api/authorize', authRoutes)
 
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);
