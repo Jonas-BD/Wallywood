@@ -1,4 +1,4 @@
-import e, { Request, Response } from "express"
+import { Request, Response } from "express"
 import { prisma } from "../prisma"
 import bcrypt from "bcrypt"
 
@@ -14,7 +14,6 @@ export const getRecords = async (req: Request, res: Response) => {
 
 export const getRecord = async (req: Request, res: Response) => {
     const id = Number(req.params.id)
-    const { firstname, lastname, email, password, role, isActive } = req.body
     if (!id) {
         return res.status(400).json({ error: 'Invalid user ID'})
     }
@@ -22,14 +21,6 @@ export const getRecord = async (req: Request, res: Response) => {
     try {
         const data = await prisma.user.findUnique({
             where: { id },
-            select: {
-                id: true,
-                firstname: true,
-                lastname: true,
-                email: true,
-                role: true,
-                isActive: Boolean(isActive)
-            }
         })
         return res.status(200).json(data)
     } catch (error) {
@@ -55,7 +46,7 @@ export const createRecord = async (req: Request, res: Response) => {
                 password: hashedPassword,
                 role,
                 isActive: Boolean(isActive),
-                createdAt
+                createdAt,
             }
         })
         return res.status(201).json(data)
