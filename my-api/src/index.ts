@@ -5,6 +5,7 @@ import { authRoutes } from './routes/authRoutes.js'
 import { loginRoutes } from './routes/loginRoutes.js'
 import { posterRoutes } from './routes/posterRoutes.js'
 import { genreRoutes } from './routes/genreRoutes.js'
+import { cartLinesRoutes } from './routes/cartLinesRoutes.js'
 
 dotenv.config({ quiet: true })
 
@@ -18,6 +19,7 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use('/api/users', userRoutes)
 app.use('/api/posters', posterRoutes)
+app.use('/api/cartlines', cartLinesRoutes)
 app.use('/api/genres', genreRoutes)
 app.use('/login', loginRoutes)
 app.use('/api/authorize', authRoutes)
