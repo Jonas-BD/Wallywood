@@ -21,5 +21,16 @@ export const fieldTypes: Record<string, Record<string, 'string' | 'number' | 'bo
         stock: 'number',
         createdAt: 'date',
         updatedAt: 'date'
+    },
+    genre: {
+        id: 'number',
+        title: 'string',
+        slug: 'string',
+        createdAt: 'date',
+        updatedAt: 'date'
+    },
+    genrePosterRel: {
+        genreId: 'number',
+        posterId: 'number'
     }
 }
