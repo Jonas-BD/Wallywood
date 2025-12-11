@@ -30,7 +30,7 @@ export const getRecord = async (req: Request, res: Response) => {
 }
 
 export const createRecord = async (req: Request, res: Response) => {
-    const { firstname, lastname, email, password, role, isActive, createdAt } = req.body
+    const { firstname, lastname, email, password, role, isActive } = req.body
     const hashedPassword = await bcrypt.hash(password, 10)
 
     if (!firstname || !lastname || !email || !password || !role) {
@@ -46,7 +46,6 @@ export const createRecord = async (req: Request, res: Response) => {
                 password: hashedPassword,
                 role,
                 isActive: Boolean(isActive),
-                createdAt,
             }
         })
         return res.status(201).json(data)

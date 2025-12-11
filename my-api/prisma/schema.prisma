@@ -26,7 +26,7 @@ model User {
   password String
   role Role
   isActive Boolean
-  createdAt DateTime
+  createdAt DateTime @default(now())
   cartlines Cartlines[]
   userRatings userRatings[]
 
@@ -40,7 +40,7 @@ model Cartlines {
   posterId Int
   poster Posters @relation(fields: [posterId], references: [id])
   quantity Int
-  createdAt DateTime
+  createdAt DateTime @default(now())
 
   @@map("cartlines")
 }
@@ -71,7 +71,7 @@ model userRatings {
   posterId Int
   poster Posters @relation(fields: [posterId], references: [id])
   numStars Int
-  createdAt DateTime
+  createdAt DateTime @default(now())
 
   @@map("userratings")
 }
@@ -81,8 +81,8 @@ model Genre {
   genrePosterRels GenrePosterRel[]
   title String
   slug String
-  createdAt DateTime
-  updatedAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("genre")
 }
