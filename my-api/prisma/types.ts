@@ -8,5 +8,18 @@ export const fieldTypes: Record<string, Record<string, 'string' | 'number' | 'bo
         role: 'string',
         isActive: 'boolean',
         createdAt: 'date'
+    },
+    posters: {
+        id: 'number',
+        name: 'string',
+        slug: 'string',
+        description: 'string',
+        image: 'string',
+        width: 'number',
+        height: 'number',
+        price: 'number',
+        stock: 'number',
+        createdAt: 'date',
+        updatedAt: 'date'
     }
 }

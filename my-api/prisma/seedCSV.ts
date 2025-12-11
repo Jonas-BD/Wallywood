@@ -22,7 +22,7 @@ async function main() {
             skip_empty_lines: true
         })
         const data = await Promise.all(raw.map((row: any) => cast(model, row)))
-        await (prisma as any)[model].createMany({ data, skipDuplicates: true })
+        await (prisma as any)[model].createMany({ data, skipDuplicates: true})
     }
 }
 

@@ -55,8 +55,8 @@ model Posters {
   height Int
   price Float
   stock Int
-  createdAt DateTime
-  updatedAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
   cartlines Cartlines[]
   userratings userRatings[]
   genrePosterRels GenrePosterRel[]
