@@ -27,20 +27,20 @@ model User {
   role Role
   isActive Boolean
   createdAt DateTime @default(now())
-  cartlines Cartlines[]
+  cartlines cartLines[]
   userRatings userRatings[]
 
   @@map("user")
 }
 
-model Cartlines {
+model cartLines {
   id Int @id @default(autoincrement())
   userId Int
-  user User @relation(fields: [userId], references: [id])
   posterId Int
-  poster Posters @relation(fields: [posterId], references: [id])
   quantity Int
   createdAt DateTime @default(now())
+  poster Posters @relation(fields: [posterId], references: [id])
+  user User @relation(fields: [userId], references: [id])
 
   @@map("cartlines")
 }
@@ -57,7 +57,7 @@ model Posters {
   stock Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  cartlines Cartlines[]
+  cartlines cartLines[]
   userratings userRatings[]
   genrePosterRels GenrePosterRel[]
 
@@ -72,7 +72,7 @@ model userRatings {
   poster Posters @relation(fields: [posterId], references: [id])
   numStars Int
   createdAt DateTime @default(now())
-
+  
   @@map("userratings")
 }
 

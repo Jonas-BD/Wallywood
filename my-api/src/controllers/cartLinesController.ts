@@ -3,7 +3,7 @@ import { prisma } from "../prisma";
 
 export const getRecords = async (req: Request, res: Response) => {
     try {
-        const data = await prisma.cartlines.findMany()
+        const data = await prisma.cartLines.findMany()
         res.json(data)
     } catch (error) {
         console.error(error)
@@ -19,7 +19,7 @@ export const getRecord = async (req: Request, res: Response) => {
     }
 
     try {
-        const data = await prisma.cartlines.findUnique({
+        const data = await prisma.cartLines.findUnique({
             where: { id }
         })
         return res.status(200).json(data)
@@ -37,7 +37,7 @@ export const createRecord = async (req: Request, res: Response) => {
     }
 
     try {
-        const data = await prisma.cartlines.create({
+        const data = await prisma.cartLines.create({
             data: {
                 userId: Number(userId),
                 posterId: Number(posterId),
@@ -64,7 +64,7 @@ export const updateRecord = async (req: Request, res: Response) => {
     }
 
     try {
-        const data = await prisma.cartlines.update({
+        const data = await prisma.cartLines.update({
             where: { id },
             data: {
                 userId: Number(userId),
@@ -87,7 +87,7 @@ export const deleteRecord = async (req: Request, res: Response) => {
     }
 
     try {
-        const data = await prisma.cartlines.delete({
+        const data = await prisma.cartLines.delete({
             where: { id }
         })
         return res.status(200).json(data)
